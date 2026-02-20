@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f0f4ff;
+  --surface: #ffffff;
+  --border: #e0e7ff;
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --accent: #ec4899;
+  --text: #1e293b;
+  --text-dim: #94a3b8;
+  --btn-bg: #f8fafc;
+  --shadow: rgba(99, 102, 241, 0.1);
+}
+
+body {
+  background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #ddd6fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+.calculator {
+  width: 340px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border);
+}
+
+.calc-logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--primary);
+}
+
+.calc-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot:nth-child(1) { background: #ef4444; }
+.dot:nth-child(2) { background: #f59e0b; }
+.dot:nth-child(3) { background: #10b981; }
+
+.display {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 25px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.expression {
+  font-size: 14px;
+  color: var(--text-dim);
+  min-height: 20px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+  line-height: 1;
+  word-break: break-all;
+}
+
+.result.long {
+  font-size: 28px;
+}
+
+.result.error {
+  color: #ef4444;
+  font-size: 20px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--primary);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+button {
+  position: relative;
+  height: 65px;
+  border: 2px solid var(--border);
+  border-radius: 15px;
+  background: var(--btn-bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+button:hover {
+  background: #ffffff;
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.2);
+  transform: scale(0);
+  animation: ripple-anim 0.4s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-anim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+button.op {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+  color: #ffffff;
+  border-color: var(--primary);
+  font-size: 22px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+button.op:hover {
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+button.equals {
+  background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+  color: #ffffff;
+  border-color: var(--accent);
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+button.equals:hover {
+  box-shadow: 0 8px 25px rgba(236, 72, 153, 0.4);
+}
+
+button.fn {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  border-color: #fde68a;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button.fn:hover {
+  border-color: #fbbf24;
+}
+
+button.zero {
+  grid-column: span 2;
+}
+
+button.decimal {
+  font-size: 24px;
+}
+
+.calc-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+@keyframes flash {
+  0%, 100% { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+  50% { background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%); }
+}
+
+.display.flash {
+  animation: flash 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.calculator.shake {
+  animation: shake 0.3s ease;
+}
